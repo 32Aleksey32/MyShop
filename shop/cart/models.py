@@ -1,4 +1,7 @@
 from django.db.models import CASCADE, DateTimeField, Model, OneToOneField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from user.models import User
 
 
@@ -14,3 +17,10 @@ class Cart(Model):
 
     def __str__(self):
         return f'Корзина пользователя {self.user.username}'
+
+
+@receiver(post_save, sender=User)
+def create_order(sender, instance, created, **kwargs):
+    """При создании нового пользователя создается объект Cart"""
+    if created:
+        Cart.objects.create(user=instance, id=instance.id)

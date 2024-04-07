@@ -12,13 +12,14 @@ DATA = [
     'product.sql',
     'cart.sql',
     'order.sql',
-    'review.sql'
+    'review.sql',
+    'cart_product.sql'
 ]
 
 
 def main(filename: str):
     project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    dumps_directory = os.path.join(project_path, 'MyShop/dumps')
+    dumps_directory = os.path.join(project_path, 'dumps')
     file_path = os.path.join(dumps_directory, filename)
 
     with connection.cursor() as cursor:

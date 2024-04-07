@@ -7,7 +7,7 @@ class Product(Model):
     price = IntegerField(default=0, verbose_name='Цена')
     description = CharField(max_length=250, default='', blank=True, null=True, verbose_name='Описание')
     category = ForeignKey('category.Category', on_delete=CASCADE, related_name='products', verbose_name='Категория')
-    image = ImageField(upload_to='uploads/products/', verbose_name='Изображение')
+    image = ImageField(upload_to='product_images/', verbose_name='Изображение')
 
     class Meta:
         ordering = ['name']

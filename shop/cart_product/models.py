@@ -13,7 +13,6 @@ class CartProduct(Model):
         verbose_name_plural = 'Товары в корзине'
         db_table = 'shop"."cart_product'
 
-
     def __str__(self):
         return f'{self.product} в корзине № {self.cart.id}'
 

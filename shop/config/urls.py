@@ -1,20 +1,30 @@
+from cart.views import CartViewSet
+from cart_product.views import CartProductViewSet
+from category.views import CategoryViewSet
+from config.settings import MEDIA_ROOT, MEDIA_URL
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from order.views import OrderViewSet
+from product.views import ProductViewSet
+from rest_framework.routers import DefaultRouter
+from review.views import ReviewViewSet
+from user.views import CustomUserViewSet
+
+router = DefaultRouter()
+
+router.register(r'category', CategoryViewSet)
+router.register(r'product', ProductViewSet)
+router.register(r'user', CustomUserViewSet)
+router.register(r'order', OrderViewSet)
+router.register(r'cart', CartViewSet)
+router.register(r'cart_product', CartProductViewSet)
+router.register(r'review', ReviewViewSet)
+
 
 urlpatterns = [
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-
-    path('drf-auth/', include('rest_framework.urls')), # login/ или logout/
-
-    # чтобы получить токен, заходим на token/ и отправляем username/пароль и получаем access токен,
-    # его используем в headers: Bearer и сам токен
-    # если прошло 5 мин и токен недействительный то берем refresh токен и отправляем его на ссылку ниже
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
+    path('', include(router.urls)),
+    path('drf-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('product/', include('product.urls')),
     path('category/', include('category.urls')),
@@ -23,4 +33,4 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('cart_product/', include('cart_product.urls')),
     path('review/', include('review.urls')),
-]
+] + static(MEDIA_URL, document_root=MEDIA_ROOT)

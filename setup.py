@@ -8,13 +8,12 @@ REQUIRES = [
     'setuptools==65.5.1',
     'wheel==0.38.4',
     'pip==23.3.2',
-    'djoser==2.2.2'
 ]
 
 
 CODESTYLE_REQUIRES = [
     'flake8==6.1.0',
-    'isort==5.3.2',
+    'isort==5.13.2',
 ]
 
 
