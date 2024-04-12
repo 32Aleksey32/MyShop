@@ -1,13 +1,13 @@
 from cart_product.serializer import CartProductSerializer
 from rest_framework.fields import SerializerMethodField
+from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
-from user.serializer import UserSerializer
 
 from .models import Cart
 
 
 class CartSerializer(ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = PrimaryKeyRelatedField(read_only=True)
     products = CartProductSerializer(many=True, read_only=True)
     total_price_an_cart = SerializerMethodField()
 

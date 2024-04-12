@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Review
 from .serializer import ReviewSerializer
@@ -8,16 +8,8 @@ from .serializer import ReviewSerializer
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
 
-    def list(self, request, *args, **kwargs):
-        """
-        Получаем отзывы покупателя
-        """
-        user_id = request.query_params.get('user_id')
-        if user_id:
-            reviews = self.queryset.filter(user_id=user_id)
-        else:
-            reviews = self.queryset
-
-        serializer = self.get_serializer(reviews, many=True)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        # При создании отзыва берем текущего пользователя
+        serializer.save(user=self.request.user)

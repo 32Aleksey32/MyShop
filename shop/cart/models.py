@@ -20,7 +20,7 @@ class Cart(Model):
 
 
 @receiver(post_save, sender=User)
-def create_order(sender, instance, created, **kwargs):
+def create_cart(sender, instance, created, **kwargs):
     """При создании нового пользователя создается объект Cart"""
     if created:
         Cart.objects.create(user=instance, id=instance.id)
