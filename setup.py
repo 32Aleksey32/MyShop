@@ -8,6 +8,8 @@ REQUIRES = [
     'setuptools==65.5.1',
     'wheel==0.38.4',
     'pip==23.3.2',
+    'python-dotenv==1.0.1',
+    "django-filter==24.2"
 ]
 
 

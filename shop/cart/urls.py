@@ -7,5 +7,4 @@ router = DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('/carts/{id}/create-order/', include(router.urls)),
 ]
