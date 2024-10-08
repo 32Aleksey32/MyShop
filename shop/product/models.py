@@ -1,4 +1,3 @@
-
 from django.db.models import CASCADE, CharField, ForeignKey, ImageField, IntegerField, Model
 
 
@@ -16,4 +15,4 @@ class Product(Model):
         db_table = 'shop"."products'
 
     def __str__(self):
-        return f'{self.name} ({self.price} руб.)'
+        return f'{self.name}'
