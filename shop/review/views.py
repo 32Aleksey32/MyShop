@@ -11,7 +11,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['product', 'rating']
+    filterset_fields = ['product', 'score']
 
     def perform_create(self, serializer):
         # При создании отзыва берем текущего пользователя
